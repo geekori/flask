@@ -1,0 +1,21 @@
+<html>
+    <head>
+       <meta charset='UTF-8'>
+       <title>Flask-WTF模块</title>
+    </head>
+    <body>
+    {% for message in form.firstname.errors %}
+        <div>{{message}}
+    {% endfor %}
+    <form action='http://localhost:1234' method=post>
+    <fieldset>    
+        {{form.hidden_tag()}}
+        {{form.firstname.label}}<br>
+        {{form.firstname}}  
+       
+        <br>
+        {{form.submit}}
+    </fieldset>
+    </form>
+    </body>
+</html>

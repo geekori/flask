@@ -1,0 +1,36 @@
+<html>
+    <head>
+       <meta charset='UTF-8'>
+       <title>Flask-WTF支持的选择表单组件</title>
+    </head>
+    <body>
+    {% if ok %}
+    <script>
+       alert('数据录入成功.')
+    </script>
+    {% endif %}
+    {% for message in form.radio.errors %}
+        <div>{{message}}
+    {% endfor %}
+    {% for message in form.select.errors %}
+        <div>{{message}}
+    {% endfor %}  
+    {% for message in form.selectMultiple.errors %}
+        <div>{{message}}
+    {% endfor %}      
+    <form action='http://localhost:1234' method=post>
+    <fieldset>    
+        {{form.hidden_tag()}}
+        {{form.radio.label}}<br>
+        {{form.radio}}<br>
+        {{form.select.label}}<br>
+        {{form.select}}
+        {{form.selectMultiple.label}}<br>
+        {{form.selectMultiple}}        
+        <br>
+        <br>                    
+        {{form.submit}}
+    </fieldset>
+    </form>
+    </body>
+</html>
