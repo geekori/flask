@@ -54,6 +54,7 @@ class Note(db.Model):
 def index():
     form = DeleteNoteForm()
     notes = Note.query.all()
+
     return render_template('index.html', notes=notes, form=form)
 
 
@@ -65,7 +66,7 @@ def new_note():
         note = Note(body=body)
         db.session.add(note)
         db.session.commit()
-        flash('Your note is saved.')
+        flash('笔记已经被保存.')
         return redirect(url_for('index'))
     return render_template('new_note.html', form=form)
 
@@ -77,7 +78,7 @@ def edit_note(note_id):
     if form.validate_on_submit():
         note.body = form.body.data
         db.session.commit()
-        flash('Your note is updated.')
+        flash('笔记已经被更新.')
         return redirect(url_for('index'))
     form.body.data = note.body
     return render_template('edit_note.html', form=form)
@@ -90,7 +91,7 @@ def delete_note(note_id):
         note = Note.query.get(note_id)
         db.session.delete(note)
         db.session.commit()
-        flash('Your note is deleted.')
+        flash('笔记已经被删除.')
     else:
         abort(400)
     return redirect(url_for('index'))
