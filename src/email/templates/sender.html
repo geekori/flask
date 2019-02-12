@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发送Email</title>
+    <script src="static/jquery-3.3.1.min.js"></script>
+    <script src="static/wangEditor.js"></script>
+</head>
+<body>
+    <script>
+        function onClick_SendMail() {
+            $.ajax({
+                type:'POST',
+                url:'/sendmail',
+                data:{
+                    email:$('#email').val(),
+                    subject:$('#subject').val(),
+                    body:$('#body').val()
+                }
+            }).done(function(msg){
+                alert(msg)
+            })
+        }
+        function onClick_SendHTMLMail() {
+            $.ajax({
+                type:'POST',
+                url:'/sendHTML',
+                data:{
+                    email:$('#email').val(),
+                    subject:$('#subject').val(),
+                    body:editor.txt.html()
+                }
+            }).done(function(msg){
+                alert(msg)
+            })
+        }
+    </script>
+
+    地址：<input id="email"><p/>
+    标题：<input id="subject"><p/>
+    内容：<br><textarea id="body" style="width:300px;height:300px"></textarea><p/>
+    <div id="div1" style="width:600px"></div>
+    <button onclick="onClick_SendMail()">发送Email</button>
+    <button onclick="onClick_SendHTMLMail()">发送HTML Email</button>
+    <script>
+        var E = window.wangEditor
+        var editor = new E('#div1')
+        editor.create()
+
+    </script>
+</body>
+</html>
